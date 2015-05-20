@@ -42,7 +42,8 @@ var baseOptions = {
 	expectFail: false,
 	parser: null,
 	env: {},
-	gruntOptions: {}
+	gruntOptions: {},
+	inheritStdio: false
 };
 
 module.exports = function (grunt) {

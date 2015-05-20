@@ -8,7 +8,8 @@
       "fail_warn": "cli test \"fail_warn\" task",
       "fail_fatal": "cli test \"fail_fatal\" task",
       "env": "cli test \"env\" task",
-      "gruntOptions": "cli test \"gruntOptions\" task"
+      "gruntOptions": "cli test \"gruntOptions\" task",
+      "inheritStdio": "A long running async task to test real-time output"
     },
     "alias": {
       "default": [

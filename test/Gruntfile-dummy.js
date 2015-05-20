@@ -36,7 +36,26 @@ module.exports = function (grunt) {
 					echo: 'echo'
 				}
 			}
+		},
+		inheritStdio: {
+			doIt: {}
 		}
+	});
+
+	//register a long running async multiTask to test inheritStdio (make sure we get real-time output from the child process rather than having to wait)
+	grunt.registerMultiTask('inheritStdio', 'A long running async task to test real-time output', function() {
+		var done = this.async();
+
+		//each second, for 5 seconds, log something, then finish the task
+		var n = 0;
+		var interval = setInterval(function() {
+			n++;
+			grunt.log.writeln('long task logging value of n: ' + n.toString());
+			if (n === 5) {
+				clearInterval(interval);
+				done();
+			}
+		}, 1000);
 	});
 
 	grunt.registerTask('default', ['echo:before', 'dummies', 'echo:after']);

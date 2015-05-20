@@ -53,6 +53,9 @@ module.exports = function (grunt) {
 			},
 			parser_module: {
 				src: ['test/init.js', 'test/spec/parser-module.test.js']
+			},
+			inherit_stdio: {
+				src: ['test/init.js', 'test/spec/inherit-stdio.test.js']
 			}
 		},
 		// dogfooding
@@ -66,7 +69,8 @@ module.exports = function (grunt) {
 					// writeShell: 'test/shell/',
 
 					// keep this updated
-					minimumFiles: 6
+					minimumFiles: 6,
+					maximumFiles: 11
 				},
 				src: ['test/Gruntfile*.js']
 			},
@@ -81,13 +85,20 @@ module.exports = function (grunt) {
 			},
 			parser: {
 				src: ['test/Gruntfile-parser.js']
+			},
+			inherit_stdio: {
+				options: {
+					inheritStdio: true
+				},
+				src: ['test/_Gruntfile-inheritStdio.js']
 			}
 		}
 	});
 
 	grunt.registerTask('prep', ['clean', 'jshint']);
 
-	grunt.registerTask('test', ['prep', 'run_grunt:all_tests', 'mochaTest:all']);
+	grunt.registerTask('test', ['prep', 'run_grunt:all_tests', 'run_grunt:inherit_stdio', 'mochaTest:all']);
+	grunt.registerTask('test:stdio', ['prep', 'run_grunt:inherit_stdio', 'mochaTest:inherit_stdio']);
 
 	grunt.registerTask('default', ['test']);
 
